@@ -91,3 +91,16 @@ mglearn.plots.plot_knn_regression(1)
 mglearn.plots.plot_knn_regression(3)
 plt.show()
 
+from sklearn.neighbors import KNeighborsRegressor
+
+X, y = mglearn.datasets.make_wave(n_samples=40)
+# wave dataset을 training set와 test set로 나눈다.
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+# neighbors number를 3으로 하여 model의 object를 만든다.
+reg = KNeighborsRegressor(n_neighbors=3)
+# training data와 target data를 사용하여 model을 학습시킨다.
+reg.fit(X_train, y_train)
+
+print('test set prediction:\n{}'.format(reg.predict(X_test)))
+print('test set R^2:{:.2f}'.format(reg.score(X_test, y_test)))
